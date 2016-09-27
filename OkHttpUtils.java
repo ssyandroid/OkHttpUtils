@@ -432,8 +432,6 @@ public class OkHttpUtils {
     }
 
     private Request buildPostRequest(String url, boolean isDecrypt, String strBody) {
-
-        LogMsg.i(TAG, "url=" + url + "\nstrBody=" + strBody);
         //json
 //        MediaType JSON =MediaType.parse("application/json; charset=utf-8");
 //        RequestBody requestBody = RequestBody.create(JSON,json);
@@ -444,8 +442,8 @@ public class OkHttpUtils {
 
         final byte[] data = strBody.toString().getBytes();
         if (isDecrypt) {
-            /**********TEA加密***********/
-            Encrypt_Tea.tea_encrypt_fun(data, data.length);
+            /**********这里是你们自己进行加密的方***********/
+            
         }
 
         RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, data);
@@ -465,7 +463,6 @@ public class OkHttpUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 sendFailResultCallback(call, e, finalCallback);
-                LogMsg.e(TAG, "OkHttp_onFailure:" + e.toString());
             }
 
             @Override
@@ -473,19 +470,16 @@ public class OkHttpUtils {
                 try {
                     String string;
                     if (isDecrypt) {
-                        byte[] bytes = response.body().bytes();
-                        /*******************TEA解密*********************/
-                        Encrypt_Tea.tea_decrypt_fun(bytes, bytes.length);
-                        string = new String(bytes);
+                        /*******************这里是你们自己解密方法*********************/
+                        /**********************************************************/
+                        string = response.body().string();
                     } else {
                         string = response.body().string();
 //                            Object o = finalCallback.parseNetworkResponse(response);
                     }
                     sendSuccessResultCallback(string, response, finalCallback);
-                    LogMsg.i(TAG, "OkHttp_code:" + response.code() + " onResponse:" + string);
                 } catch (Exception e) {
                     sendFailResultCallback(call, e, finalCallback);
-                    LogMsg.e(TAG, "OkHttp_onResponse:" + e.toString());
                 }
             }
         });
