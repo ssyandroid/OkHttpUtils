@@ -15,6 +15,7 @@
 *官方说明：[http://square.github.io/okhttp](http://square.github.io/okhttp/)*
 
 - Android Studio的用户，可以选择添加:
+
 >- Gradle:
 ``` groovy
 compile 'com.squareup.okhttp3:okhttp:3.4.1'
@@ -22,6 +23,7 @@ compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
 - Eclipse的用户，可以下载最新的jar [↓ Latest JAR](https://search.maven.org/remote_content?g=com.squareup.okhttp3&a=okhttp&v=LATEST "LATEST") 添加依赖。
 - 注意:okhttp内部依赖okio。
+
 >- Gradle:
 ``` groovy
 compile 'com.squareup.okio:okio:1.10.0'
